@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping(name = "/api/products", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/api/products", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<ProductDto>> getAllProducts() {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }

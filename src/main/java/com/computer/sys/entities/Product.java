@@ -1,10 +1,16 @@
 package com.computer.sys.entities;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.context.annotation.Lazy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -27,6 +33,12 @@ public class Product implements Serializable {
 
     @Column(name = "PROD_END_DATE")
     private Date endDate;
+
+    @Lazy
+    @Fetch(FetchMode.JOIN)
+    @OneToMany(mappedBy ="product" )
+    private Set<Price> prices = new HashSet<>();
+
 
     public Product() {
     }
@@ -69,6 +81,14 @@ public class Product implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Set<Price> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(Set<Price> prices) {
+        this.prices = prices;
     }
 
     @Override
